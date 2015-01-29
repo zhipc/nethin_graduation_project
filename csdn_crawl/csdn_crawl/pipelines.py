@@ -8,4 +8,8 @@
 
 class CsdnCrawlPipeline(object):
     def process_item(self, item, spider):
-        return item
+        print "url:",item['url']
+        print "title:",item['title'].encode('utf-8')
+        print "author:",item['author'].encode('utf-8')
+        print "content:",(item['content'])[0:10].encode('utf-8') + '...'
+        

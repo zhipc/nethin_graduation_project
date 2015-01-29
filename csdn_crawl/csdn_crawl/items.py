@@ -12,3 +12,9 @@ class CsdnCrawlItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass
+
+class Article(scrapy.Item):
+    url = scrapy.Field()
+    title = scrapy.Field()
+    author = scrapy.Field()
+    content = scrapy.Field()

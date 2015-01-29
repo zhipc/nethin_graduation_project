@@ -14,4 +14,11 @@ SPIDER_MODULES = ['csdn_crawl.spiders']
 NEWSPIDER_MODULE = 'csdn_crawl.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'csdn_crawl (+http://www.yourdomain.com)'
+USER_AGENT = '(+http://www.nethin.net) "just for my graduation project, if you are angry with it, mail me <dipijvz7@gmail.com>"'
+
+ITEM_PIPELINES = {'csdn_crawl.pipelines.CsdnCrawlPipeline':800}
+
+DOWNLOAD_DELAY = 1.0
+AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_MAX_DELAY = 120.0
+AUTOTHROTTLE_START_DELAY = 1.0
