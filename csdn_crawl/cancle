@@ -1,0 +1,16 @@
+#!/bin/bash
+
+CURL=/usr/bin/curl
+
+_help()
+{
+	echo "Usage: $0 <jobs>"
+	exit 0
+}
+
+if test -z $1
+then
+   _help
+fi
+
+$CURL http://localhost:6800/cancel.json -d project=csdn_crawl -d job=$1
