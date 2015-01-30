@@ -1,6 +1,3 @@
-csdn_crwal.egg-info/
-project.egg-info/
-build/
-log/
-dbs/
+csdn_crawl.egg-info/*
+build/*
 setup.py

@@ -1,0 +1,12 @@
+setup.py
+csdn_crawl/__init__.py
+csdn_crawl/items.py
+csdn_crawl/pipelines.py
+csdn_crawl/settings.py
+csdn_crawl.egg-info/PKG-INFO
+csdn_crawl.egg-info/SOURCES.txt
+csdn_crawl.egg-info/dependency_links.txt
+csdn_crawl.egg-info/entry_points.txt
+csdn_crawl.egg-info/top_level.txt
+csdn_crawl/spiders/__init__.py
+csdn_crawl/spiders/csdn.py
