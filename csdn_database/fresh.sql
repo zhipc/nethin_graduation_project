@@ -9,12 +9,13 @@ use gpro;
 create table crawl (
        id int(10) primary key auto_increment,
        url varchar(128),
-       md5 varchar(65) unique,
+       url_md5 varchar(65) unique,
+       content_md5 varchar(65) unique,
        title varchar(65),
        author varchar(65),
        status int(10),
        content text,
-       index index__md5 using btree (md5)
+       index index__md5 using btree (url_md5, content_md5)
 );
 
 create table split (
