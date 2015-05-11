@@ -20,31 +20,16 @@ create table crawl (
 
 create table split (
        id int(10) primary key auto_increment,
-       crawl_id int(10) unique, 
-       split_words text
-);
-
-create table guess (
-       id int(10) primary key auto_increment,
-       key_word varchar(16) unique,
-       suggest_words text,
-       suggest_count int(10)
-);
-
-create table match_map (
-       id int(15) primary key auto_increment,
-       f_key varchar(16),
-       b_key varchar(16),
-       match_count int(10),
-       index index__matching using btree (f_key, b_key)
+       crawl_id int(10) unique,
+       split_words text,
+       split_key_words text
 );
 
 create table key_map (
        id int(10) primary key auto_increment,
-       key_word varchar(16),
+       key_word varchar(16) unique,
        link_count int(10),
-       link_crawls text,
-       index index__key_word using btree (key_word)
+       link_crawls text
 );
 
 

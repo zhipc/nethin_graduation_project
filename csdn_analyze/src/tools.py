@@ -88,36 +88,46 @@ def str_bq(string, charset = "utf-8"):
         rstring += unichr(inside_code)
     return rstring.encode(charset)
 
-def to_valid_str(text):
+def escape_str(text):
     if isinstance(text, unicode):
         text = text.encode('utf-8')
     else:
+        text = str(text)
+
+    return MySQLdb.escape_string(text)
+
+
+def to_valid_str(text):
+    if isinstance(text, unicode):
+        text = text.encode('utf-8')
+    elif not isinstance(text, str):
         text = str(text)
 
     text = text.replace("\xc2\xa0","")
     text = str_qb(text)
     text = re.sub(r"[\s]+", " ", text)
         
-    return text
+    return text.strip()
 
 
 def nlpir_init():
     if not PyNLPIR.init(conf.DATA_DIR, PyNLPIR.Constants.CodeType.UTF8_CODE):
         raise NLPIRInitError("can't init NLPIR")
 
+
 def analyze_str(text, pos_tag = False):
-    text = to_valid_str(text)
     ret_str = PyNLPIR.paragraph_process(text, pos_tag)
-    return ret_str.strip().split(" ")
+    return filter(lambda x: x != "", map(str.strip, ret_str.split(" ")))
+
 
 def get_keywords(text, max_limit = 10, weight_out = False):
-    text = to_valid_str(text)
-
     ret_str = PyNLPIR.get_keywords(str(text), max_limit, weight_out)
-    return ret_str.strip().split("#")
+    return filter(lambda x: x != "", map(str.strip, ret_str.split("#")))
+
     
 def nlpir_exit():
     PyNLPIR.exit()
+
 
 if __name__ == "__main__":
     import time
