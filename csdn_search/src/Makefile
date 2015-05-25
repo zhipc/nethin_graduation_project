@@ -1,14 +1,14 @@
 include ../Config.mk
 
-CFLAGS += -Wall
+CXXFLAGS += -Wall
 
 SRCDIR = tools
 
-DEFINE = -DVERSION="0.0.1"
+DEFINE = -DVERSION=\"0.0.1\"
 
 TGTDIR = . $(SRCDIR)
-TGTSRC = $(foreach dir,$(TGTDIR),$(wildcard $(dir)/*.c))
-OBJ    = $(patsubst %.c,%.o,$(TGTSRC))
+TGTSRC = $(foreach dir,$(TGTDIR),$(wildcard $(dir)/*.cpp))
+OBJ    = $(patsubst %.cpp,%.o,$(TGTSRC))
 DEP    = $(patsubst %.o,%.d,$(OBJ))
 
 TARGET = csdn_search
@@ -16,41 +16,67 @@ TARGET = csdn_search
 TEST   = csdn_search_test
 
 TEST_DIR  = test $(SRCDIR)
-TEST_SRC  = $(foreach dir,$(TEST_DIR),$(wildcard $(dir)/*.c))
-TEST_OBJ  = $(patsubst %.c,%.o,$(TEST_SRC))
-TEST_DEP  = $(patsubst %.c,%.d,$(TEST_SRC))
+TEST_SRC  = $(foreach dir,$(TEST_DIR),$(wildcard $(dir)/*.cpp))
+TEST_OBJ  = $(patsubst %.cpp,%.o,$(TEST_SRC))
+TEST_DEP  = $(patsubst %.o,%.d,$(TEST_OBJ))
 
 TEST_INC  = $(INC)
 TEST_LIB  = $(LIB)
 TEST_LIBD = $(LIBD)
 
-TEST_CFLAGS = $(CFALGS) -g -DDEBUG
+TEST_CXXFLAGS = $(CFALGS) -g -DDEBUG
 
 DELETE = $(TARGET) $(OBJ) $(DEP) $(TEST_OBJ) $(TEST_DEP) $(TEST)
+
 
 all: $(TARGET)
 
 test: $(TEST)
-	chmod +x ./$<
-	./$<
+	@echo [START_TEST]
+	@./$<
+	@echo [END_TEST]
 
 install: $(TARGET)
 	mv $(TARGET) ../bin
 
 $(TEST): $(TEST_OBJ)
-	$(CC) $(TEST_CFLAGS) $(DEFINE) $(TEST_INC) $(TEST_LIBD) $(TEST_LIB) $^ -o $@
+	$(CXX) \
+	$(TEST_CXXFLAGS) \
+	$(DEFINE) \
+	$(TEST_INC) \
+	$(TEST_LIBD) \
+	$(TEST_LIB) \
+	$^ \
+	-o $@
 
 $(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) $(DEFINE) $(INC) $(LIBD) $(LIB) $^ -o $@
+	$(CXX) \
+	$(CXXFLAGS) \
+	$(DEFINE) \
+	$(INC) \
+	$(LIBD) \
+	$(LIB) \
+	$^ \
+	-o $@
 
-%.o: %.c
-	$(CC) -c $< -o $@
+sinclude $(DEP)
+sinclude $(TEST_DEP)
 
-include $(DEP)
-include $(TEST_DEP)
+%.d: %.cpp
+	$(CXX) \
+	$(INC) \
+	-MM $< \
+	> $@
 
-%.d: %.c
-	$(CC) -MM $< > $@
+%.o: %.cpp
+	$(CXX) \
+	$(CXXFLAGS) \
+	$(DEFINE) \
+	$(INC) \
+	$(LIBD) \
+	$(LIB) \
+	-c $< \
+	-o $@
 
 .PHONY: clean all
 
