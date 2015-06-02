@@ -33,7 +33,7 @@ class CsdnCrawlPipeline(object):
         try:
             log.msg('start insert item to mysql' , log.INFO)
             sql = INSERT_SQL % { i : DelSpace(item[i]).replace("'","\\'") for i in item }
-            self.cursor.execute(sql)
+  #          self.cursor.execute(sql)
         except Exception,e:
             log.msg('insert item error : %s\n sql : \n %s' % (e, sql), log.ERROR)
             

@@ -1,10 +1,10 @@
 include ../Config.mk
 
-CXXFLAGS += -Wall
+CXXFLAGS += -Wall -g -O2
 
 SRCDIR = tools
 
-DEFINE = -DVERSION=\"0.0.1\"
+DEFINE = -DVERSION=\"0.0.1\" 
 
 TGTDIR = . $(SRCDIR)
 TGTSRC = $(foreach dir,$(TGTDIR),$(wildcard $(dir)/*.cpp))
@@ -41,22 +41,23 @@ install: $(TARGET)
 
 $(TEST): $(TEST_OBJ)
 	$(CXX) \
+	$^ \
 	$(TEST_CXXFLAGS) \
 	$(DEFINE) \
 	$(TEST_INC) \
 	$(TEST_LIBD) \
 	$(TEST_LIB) \
-	$^ \
 	-o $@
+
 
 $(TARGET): $(OBJ)
 	$(CXX) \
+	$^ \
 	$(CXXFLAGS) \
 	$(DEFINE) \
 	$(INC) \
 	$(LIBD) \
 	$(LIB) \
-	$^ \
 	-o $@
 
 sinclude $(DEP)
@@ -64,18 +65,20 @@ sinclude $(TEST_DEP)
 
 %.d: %.cpp
 	$(CXX) \
+	$< \
 	$(INC) \
-	-MM $< \
+	-MM \
 	> $@
 
 %.o: %.cpp
 	$(CXX) \
+	-c \
+	$< \
 	$(CXXFLAGS) \
 	$(DEFINE) \
 	$(INC) \
 	$(LIBD) \
 	$(LIB) \
-	-c $< \
 	-o $@
 
 .PHONY: clean all
