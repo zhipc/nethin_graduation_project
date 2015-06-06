@@ -22,7 +22,7 @@
 	{ \
 		_st_magic_init_##NAME() \
 		{ \
-			std::cout << "==================== " CSL_BLG "magic init "	\
+			std::cout << std::endl << "==================== " CSL_BLG "magic init " \
 				#NAME \
 				": " \
 				CSL_PRT(CSL_YLW, "START") \
@@ -43,7 +43,7 @@
 	{ \
 		~_st_magic_fini_##NAME() \
 		{ \
-			std::cout << "==================== " CSL_BLG "magic fini "	\
+			std::cout << std::endl << "==================== " CSL_BLG "magic fini " \
 				#NAME \
 				": " \
 				CSL_PRT(CSL_YLW, "START") \
@@ -83,6 +83,9 @@
 #define DEF_MYSQL_CHST "utf8"
 #define DEF_MYSQL_PORT "3306"
 
+#define DEF_HTTP_ADDR "127.0.0.1"
+#define DEF_HTTP_PORT "6666"
+
 #define LOG_MYSQL  "mysql"
 #define LOG_DTREE  "dtree"
 #define LOG_THREAD "thread"
@@ -96,9 +99,15 @@
 #define BG_BUFF KB * 512
 #define HG_BUFF MB * 8
 
+#define PID_FILE "./csdn_search.pid"
+
 #define GPRO_DB "gpro"
 
-#define LOAD_KEY_MAP_SQL "SELECT `id`, `key_word` FROM `key_map` LIMIT 100";
+#define LOAD_KEY_MAP_SQL "SELECT `id`, `key_word` FROM `key_map`";
+
+#define DIGEST_LIMIT  100
+#define SUGGEST_LIMIT 200
+
 
 // ==================== configure ====================
 
@@ -110,6 +119,8 @@
 	config_map["mysql_user"] = DEF_MYSQL_USER;	\
 	config_map["mysql_pass"] = DEF_MYSQL_PASS;	\
 	config_map["mysql_chst"] = DEF_MYSQL_CHST;	\
+	config_map["http_addr"] = DEF_HTTP_ADDR;        \
+	config_map["http_port"] = DEF_HTTP_PORT;        \
 	
 #define configure_line_rule "([a-z0-9A-Z_]+)\\s*=\\s*([^\\s;]*);*"
 

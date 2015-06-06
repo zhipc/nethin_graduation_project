@@ -35,7 +35,7 @@ MYSQL_CFLAGS = $(shell $(MYSQL_CONF) --cflags)
 
 
 INC  = $(foreach i,$(CONF_INC),-I$(i)) $(MYSQL_INCS)
-LIB  = -Wl,-dn $(foreach l,$(CONF_LIB),-l$(l)) -Wl,-dy -ldl -lpthread $(MYSQL_LIBS)
+LIB  = -Wl,-dn $(foreach l,$(CONF_LIB),-l$(l)) -Wl,-dy -ldl -lpthread -lrt $(MYSQL_LIBS)
 LIBD = $(foreach L,$(CONF_LIBD),-L$(L))
 
 CXXFLAGS = $(CONF_CXXFLAGS) $(MYSQL_CFLAGS)
