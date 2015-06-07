@@ -408,6 +408,9 @@ static const int search_handle(request_t& req_t, response_t& resp_t)
 			digest_list[index++] = digest;
 		}
 
+		delete rs;
+		rs = NULL;
+
 		root.clear();
 
 		string time_str = boost::str(boost::format("%lu") % (get_timestamp() - timestamp));
