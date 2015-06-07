@@ -20,3 +20,11 @@
 >>使用开源库libevent监听http-post请求,以此为基础开发服务.
 >>使用nginx转发http请求.
 
+本系统使用的开源库
+================================
+>[Scrapy](https://github.com/scrapy/scrapy)
+>[ICTCLAS2015](http://ictclas.nlpir.org/)
+>[boost](http://www.boost.org/)
+>[jsoncpp](https://github.com/open-source-parsers/jsoncpp)
+>[libevent](http://libevent.org/)
+>[zlog](https://github.com/HardySimpson/zlog)
