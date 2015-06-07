@@ -17,9 +17,12 @@
 #include <exception>
 
 // standard c libraries
+#include <ctime>
 #include <cstdlib>
 #include <cstring>
 
+// system libraries
+#include <sys/time.h>
 
 // boost libraries
 #include <boost/any.hpp>

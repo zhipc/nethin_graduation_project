@@ -86,6 +86,8 @@
 #define DEF_HTTP_ADDR "127.0.0.1"
 #define DEF_HTTP_PORT "6666"
 
+#define DEF_HTTP_BASE "/sio"
+
 #define LOG_MYSQL  "mysql"
 #define LOG_DTREE  "dtree"
 #define LOG_THREAD "thread"
@@ -121,6 +123,7 @@
 	config_map["mysql_chst"] = DEF_MYSQL_CHST;	\
 	config_map["http_addr"] = DEF_HTTP_ADDR;        \
 	config_map["http_port"] = DEF_HTTP_PORT;        \
+	config_map["http_base"] = DEF_HTTP_BASE;       
 	
 #define configure_line_rule "([a-z0-9A-Z_]+)\\s*=\\s*([^\\s;]*);*"
 
