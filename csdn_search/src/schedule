@@ -1,0 +1,61 @@
+#!/bin/bash
+
+SCRIPT=${0}
+PROGRAM=./csdn_search
+COMMAND=${1}
+PID_FILE=./.csdn_search.pid
+CONFIGURE=./conf/search.conf
+
+
+usage()
+{
+	echo "Usage: ${SCRIPT} <start|stop|restart>"
+}
+
+if ! test -f "${PROGRAM}"
+then
+    echo "not such file:" ${PROGRAM}
+    exit -1
+fi
+
+if test 2 -eq "${#}"
+then
+   usage
+fi
+
+start()
+{
+    if test -f "${PID_FILE}"
+    then
+	echo "program is running, pid:" `cat ${PID_FILE}`
+	exit
+    fi
+    (${PROGRAM} -c ${CONFIGURE} & echo ${!} > ${PID_FILE};)
+}
+
+stop()
+{
+    if ! test -f "${PID_FILE}"
+    then
+	echo "program is no running, can't not found pid file:" ${PID_FILE}
+    else
+	kill -2 `cat ${PID_FILE}`
+	rm ${PID_FILE}
+    fi
+}
+
+restart()
+{
+    stop
+    sleep 2
+    start
+}
+
+case ${COMMAND} in
+    start) start;;
+    stop) stop;;
+    restart) restart;;
+    *) usage;;
+esac
+     
+    
