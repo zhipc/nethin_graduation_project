@@ -14,7 +14,7 @@ static void _str2wstr_(const string& str,wstring& wstr)
 
 	snprintf(save_buf, SM_BUFF - 4, "%s", str.c_str());
 	
-	for(size_t i = 0; i < str_len;)
+	for(size_t i = 0; i < str_len && i < SM_BUFF - 4;)
 	{
 		uint8_t* ptr = (uint8_t*)&(save_buf[i]);
 		wchar_t wch = 0;

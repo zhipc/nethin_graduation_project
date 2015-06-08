@@ -98,6 +98,7 @@ const bool mysql_conn::QuerySql(const string& sql)
 	catch(SQLException& e)
 	{
 		zlog_error(g_mysql_log, "query mysql failed: %s", e.what());
+		reconnect();
 		return false;
 	}
 	catch(std::exception& e)
@@ -122,6 +123,7 @@ const bool mysql_conn::QuerySql(const string& sql, ResultSet*& rs)
 	catch(SQLException& e)
 	{
 		zlog_error(g_mysql_log, "query mysql failed: %s", e.what());
+		reconnect();
 		return false;
 	}
 	catch(std::exception& e)
